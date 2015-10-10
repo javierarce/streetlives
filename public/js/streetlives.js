@@ -281,6 +281,22 @@ __p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments
 return __p
 };
 
+this["JST"]["sources/templates/dialog.jst.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="Dialog-inner">\n  <div class="Dialog-content">\n    <h2>' +
+__e( title ) +
+'</h2>\n    <p>' +
+__e( text ) +
+'</p>\n  </div>\n  <footer class="Footer">\n    <button class="Button js-ok">' +
+__e( ok_button ) +
+'</button>\n  </footer>\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n\n';
+
+}
+return __p
+};
+
 this["JST"]["sources/templates/header.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -349,9 +365,9 @@ this["JST"]["sources/templates/page.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="Page-inner">\n  <div class="Page-content js-scroll">\n    ' +
+__p += '<div class="Page-inner">\n  <div class="Page-content">\n    <div class="scroll-pane js-scroll">\n      <p>' +
 __e( text ) +
-'\n  </div>\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n\n';
+'</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    </div>\n  </div>\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n\n';
 
 }
 return __p
@@ -758,8 +774,11 @@ SL.Dialog = SL.View.extend({
   className: 'Dialog is-hidden',
 
   events: {
+    'click .js-ok': 'close',
     'click .js-cancel': 'close'
   },
+
+  templateName: 'dialog',
 
   initialize: function(options) {
 
@@ -774,8 +793,9 @@ SL.Dialog = SL.View.extend({
   },
 
   render: function() {
-    this.$el.append(this.template(this.model.attributes));
-
+    var attributes = this.model.attributes;
+    this.$el.append(this.template(attributes));
+    this._initScroll();
     return this;
   },
 
@@ -784,10 +804,9 @@ SL.Dialog = SL.View.extend({
   },
 
   _setupModel: function() {
-    this.model = new SL.Model({
-      text: this.options.text,
+    this.model = new SL.Model(_.extend({
       hidden: true
-    });
+    }, this.options));
 
     this.model.bind('change:hidden', this._onChangeHidden, this);
   },
@@ -796,8 +815,28 @@ SL.Dialog = SL.View.extend({
     this.model.set('hidden', !this.model.get('hidden'));
   },
 
+  _initScroll: function() {
+    if (this.api) {
+      this.api.reinitialise();
+      return;
+    }
+
+    this.api = this.$('.js-scroll').jScrollPane().data('jsp');
+
+    if (this.api) {
+      this.api.reinitialise();
+    }
+  },
+
+  open: function() {
+    $('body').append(this.render().$el);
+    this.show();
+  },
+
   show: function() {
     this.model.set('hidden', false);
+
+    this._initScroll();
   },
 
   hide: function() {
@@ -968,6 +1007,7 @@ var LocationForm = SL.View.extend({
   },
 
   _clear: function() {
+    this.model.set({ enabled: false });
     this.$('.js-checkbox').attr('checked', false);
     this.$(".js-field").removeClass('has-error');
     this.$('.js-name').val('');
@@ -1010,8 +1050,8 @@ var LocationForm = SL.View.extend({
 
   close: function() {
     $(document).off("keyup", this._onKeyUp);
-    this._hide();
     this._clear();
+    this._hide();
   }
 });
 
@@ -1117,6 +1157,8 @@ var LocationInformation = SL.View.extend({
 
   _onComment: function() {
     this.close();
+    var success = new SL.Dialog({ title: 'Thank your for helping the community with your knowledge', text: 'We want to make sure that every voice is heard. Your post will be uploaded in the next 24-36h. Thank you for your patience', ok_button: 'Ok, thanks' });
+    success.open();
   },
 
   isOpen: function() {
@@ -1216,12 +1258,12 @@ var MapView = SL.View.extend({
 
     var sublayer = layer.getSubLayer(0);
 
-    var query = "SELECT l.*, string_agg(o.name, ', ') as offerings FROM locations AS l LEFT OUTER JOIN locations_offerings AS lo ON lo.location_id = l.cartodb_id ";
-    query += "LEFT OUTER JOIN offerings as o ON o.cartodb_id = lo.offering_id GROUP BY l.cartodb_id ";
+    var query = "SELECT l.*, string_agg(o.name, ', ') as offerings, COALESCE(sum(CASE WHEN liked THEN 0 ELSE 1 END), 0) as x, COALESCE(sum(CASE WHEN liked THEN 1 ELSE 0 END),0) as p, COUNT(NULLIF(liked, false)) as likes, COUNT(NULLIF(liked, true)) as dislikes FROM locations AS l LEFT OUTER JOIN locations_offerings AS lo ON lo.location_id = l.cartodb_id ";
+    query += "LEFT OUTER JOIN offerings as o ON o.cartodb_id = lo.offering_id LEFT OUTER JOIN comments as c ON c.location_id = l.cartodb_id GROUP BY l.cartodb_id ";
 
     layer.setQuery(query);
     sublayer.setInteraction(true);
-    sublayer.setInteractivity('cartodb_id, name, offerings, address');
+    sublayer.setInteractivity('cartodb_id, name, offerings, address, likes, dislikes, p, x');
 
     layer.on('mouseover',    this._onMouseOver);
     layer.on('mouseout',     this._onMouseOut);
@@ -1237,8 +1279,6 @@ var MapView = SL.View.extend({
     this.$el.append(this.search.render().$el);
 
     this.$el.append(this.locationInformation.render().$el);
-
-    //this.$el.append(this.addLocation.render().$el);
   },
 
   _onMouseOut: function() {
@@ -1258,6 +1298,7 @@ var MapView = SL.View.extend({
     }
 
     this.map.closePopup();
+    console.log(data);
     this.locationInformation.open(data);
   },
 
@@ -1323,6 +1364,9 @@ var MapView = SL.View.extend({
     });
 
     marker.addTo(this.map);
+
+    var success = new SL.Dialog({ title: 'Thank your for helping the community with your knowledge', text: 'We want to make sure that every voice is heard. Your post will be uploaded in the next 24-36h. Thank you for your patience', ok_button: 'Ok, thanks' });
+    success.open();
 
     this._removeCurrentSelection();
   },

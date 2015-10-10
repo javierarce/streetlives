@@ -36,6 +36,22 @@ __p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments
 return __p
 };
 
+this["JST"]["sources/templates/dialog.jst.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="Dialog-inner">\n  <div class="Dialog-content">\n    <h2>' +
+__e( title ) +
+'</h2>\n    <p>' +
+__e( text ) +
+'</p>\n  </div>\n  <footer class="Footer">\n    <button class="Button js-ok">' +
+__e( ok_button ) +
+'</button>\n  </footer>\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n\n';
+
+}
+return __p
+};
+
 this["JST"]["sources/templates/header.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -104,9 +120,9 @@ this["JST"]["sources/templates/page.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="Page-inner">\n  <div class="Page-content js-scroll">\n    ' +
+__p += '<div class="Page-inner">\n  <div class="Page-content">\n    <div class="scroll-pane js-scroll">\n      <p>' +
 __e( text ) +
-'\n  </div>\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n\n';
+'</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    </div>\n  </div>\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n\n';
 
 }
 return __p

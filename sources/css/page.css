@@ -15,24 +15,29 @@
 
 .Page-inner {
   position: relative;
-  width: 80%;
-  height: 400px;
+  width: 700px;
+  height: 500px;
   background: #FFF;
   border: 1px solid transparent;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
-  padding: 12px; }
+  padding: 25px 10px 20px 20px;
+  box-sizing: border-box; }
 
 .Page-content {
-  width: 400px;
-  height: 200px;
+  width: 100%;
+  height: 450px;
   font-family: 'Open sans', sans-serif;
   font-size: 15px;
-  font-weight: 300; }
+  font-weight: 300;
+  overflow: auto; }
 
 .Page .scroll-pane {
   width: 100%;
-  height: 200px;
+  height: 100%;
   overflow: auto; }
+
+.Page-content p {
+  margin: 0 0 10px 0; }
 
 /*# sourceMappingURL=page.css.map */

@@ -105,6 +105,7 @@ var LocationForm = SL.View.extend({
   },
 
   _clear: function() {
+    this.model.set({ enabled: false });
     this.$('.js-checkbox').attr('checked', false);
     this.$(".js-field").removeClass('has-error');
     this.$('.js-name').val('');
@@ -147,8 +148,8 @@ var LocationForm = SL.View.extend({
 
   close: function() {
     $(document).off("keyup", this._onKeyUp);
-    this._hide();
     this._clear();
+    this._hide();
   }
 });
 

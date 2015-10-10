@@ -72,12 +72,12 @@ var MapView = SL.View.extend({
 
     var sublayer = layer.getSubLayer(0);
 
-    var query = "SELECT l.*, string_agg(o.name, ', ') as offerings FROM locations AS l LEFT OUTER JOIN locations_offerings AS lo ON lo.location_id = l.cartodb_id ";
-    query += "LEFT OUTER JOIN offerings as o ON o.cartodb_id = lo.offering_id GROUP BY l.cartodb_id ";
+    var query = "SELECT l.*, string_agg(o.name, ', ') as offerings, COALESCE(sum(CASE WHEN liked THEN 0 ELSE 1 END), 0) as x, COALESCE(sum(CASE WHEN liked THEN 1 ELSE 0 END),0) as p, COUNT(NULLIF(liked, false)) as likes, COUNT(NULLIF(liked, true)) as dislikes FROM locations AS l LEFT OUTER JOIN locations_offerings AS lo ON lo.location_id = l.cartodb_id ";
+    query += "LEFT OUTER JOIN offerings as o ON o.cartodb_id = lo.offering_id LEFT OUTER JOIN comments as c ON c.location_id = l.cartodb_id GROUP BY l.cartodb_id ";
 
     layer.setQuery(query);
     sublayer.setInteraction(true);
-    sublayer.setInteractivity('cartodb_id, name, offerings, address');
+    sublayer.setInteractivity('cartodb_id, name, offerings, address, likes, dislikes, p, x');
 
     layer.on('mouseover',    this._onMouseOver);
     layer.on('mouseout',     this._onMouseOut);
@@ -93,8 +93,6 @@ var MapView = SL.View.extend({
     this.$el.append(this.search.render().$el);
 
     this.$el.append(this.locationInformation.render().$el);
-
-    //this.$el.append(this.addLocation.render().$el);
   },
 
   _onMouseOut: function() {
@@ -114,6 +112,7 @@ var MapView = SL.View.extend({
     }
 
     this.map.closePopup();
+    console.log(data);
     this.locationInformation.open(data);
   },
 
@@ -179,6 +178,9 @@ var MapView = SL.View.extend({
     });
 
     marker.addTo(this.map);
+
+    var success = new SL.Dialog({ title: 'Thank your for helping the community with your knowledge', text: 'We want to make sure that every voice is heard. Your post will be uploaded in the next 24-36h. Thank you for your patience', ok_button: 'Ok, thanks' });
+    success.open();
 
     this._removeCurrentSelection();
   },

@@ -99,6 +99,8 @@ var LocationInformation = SL.View.extend({
 
   _onComment: function() {
     this.close();
+    var success = new SL.Dialog({ title: 'Thank your for helping the community with your knowledge', text: 'We want to make sure that every voice is heard. Your post will be uploaded in the next 24-36h. Thank you for your patience', ok_button: 'Ok, thanks' });
+    success.open();
   },
 
   isOpen: function() {

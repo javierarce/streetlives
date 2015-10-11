@@ -6,9 +6,6 @@ var App = SL.View.extend({
   initialize: function() {
     this.map = new MapView({ el: this.$('.Map') });
 
-    this._setupPrivacyPage();
-    this._setupAboutPage();
-
     this._setupRouter();
 
     this.header = new Header({
@@ -20,20 +17,7 @@ var App = SL.View.extend({
 
   render: function() {
     this.map.render();
-
-    this.$el.append(this.privacyPage.render().$el);
-    this.$el.append(this.aboutPage.render().$el);
     this.$el.append(this.header.render().$el);
-  },
-
-  _setupAboutPage: function() {
-    this.aboutPage = new Page({ text: 'about' });
-    this.aboutPage.bind('close', this._showMap, this);
-  },
-
-  _setupPrivacyPage: function() {
-    this.privacyPage = new Page({ text: 'privacy' });
-    this.privacyPage.bind('close', this._showMap, this);
   },
 
   _setupRouter: function() {
@@ -46,11 +30,15 @@ var App = SL.View.extend({
   },
 
   _showAbout: function() {
-    this.aboutPage.show();
+    this.aboutPage = new Page({ text: 'about' });
+    this.aboutPage.bind('close', this._showMap, this);
+    this.aboutPage.open();
   },
 
   _showPrivacy: function() {
-    this.privacyPage.show();
+    this.privacyPage = new Page({ text: 'privacy' });
+    this.privacyPage.bind('close', this._showMap, this);
+    this.privacyPage.open();
   },
 
   _showMap: function() {

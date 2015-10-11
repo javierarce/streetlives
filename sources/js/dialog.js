@@ -9,6 +9,7 @@ SL.Dialog = SL.View.extend({
   },
 
   templateName: 'dialog',
+  templateContentName: 'dialog_content',
 
   initialize: function(options) {
 
@@ -18,14 +19,21 @@ SL.Dialog = SL.View.extend({
 
     this.options = options;
     this.template = this._getTemplate(this.templateName);
+    this.templateContent = this._getTemplate(this.templateContentName);
 
     this._setupModel();
   },
 
-  render: function() {
+  render_content: function() {
     var attributes = this.model.attributes;
-    this.$el.append(this.template(attributes));
+    this.$('.js-content').append(this.templateContent(attributes));
     this._initScroll();
+    return this;
+  },
+
+  render: function() {
+    this.$el.append(this.template());
+    this.render_content();
     return this;
   },
 
@@ -54,7 +62,10 @@ SL.Dialog = SL.View.extend({
     this.api = this.$('.js-scroll').jScrollPane().data('jsp');
 
     if (this.api) {
-      this.api.reinitialise();
+      var self = this;
+      setTimeout(function() {
+        self.api.reinitialise();
+      }, 500);
     }
   },
 
@@ -71,6 +82,10 @@ SL.Dialog = SL.View.extend({
 
   hide: function() {
     this.model.set('hidden', true);
+  },
+
+  isOpen: function() {
+    return !this.model.get('hidden');
   },
 
   close: function() {

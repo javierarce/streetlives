@@ -496,86 +496,43 @@ a {
 
 /*# sourceMappingURL=like_button.css.map */
 
-.LocationForm-fields {
-  font-family: 'Lato', sans-serif; }
-
-.LocationForm-field {
-  margin: 0 0 20px 0; }
-
-.LocationForm-label {
-  display: block;
-  font-weight: bold;
-  margin: 0 0 10px 0;
-  padding: 0 0 5px 0;
-  border-bottom: 1px solid #ccc; }
-
 .LocationForm {
   position: absolute;
-  box-sizing: border-box;
-  background: #fff;
-  width: 500px;
-  height: 400px;
-  margin-left: -250px;
-  margin-top: -200px;
-  top: 50%;
-  left: 50%;
-  z-index: 10;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 2px; }
-
-.LocationForm-inner {
-  position: relative;
-  padding: 20px;
   width: 100%;
   height: 100%;
-  box-sizing: border-box; }
-
-.LocationForm.is-hidden {
-  display: none; }
-
-.LocationForm .Footer {
-  position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
-  padding: 20px;
-  text-align: center;
-  box-sizing: border-box;
-  width: 100%; }
-
-/*# sourceMappingURL=location.css.map */
-
-.LocationForm-fields {
-  font-family: 'Open Sans', sans-serif; }
-
-.LocationForm-field {
-  margin: 0 0 20px 0; }
-
-.LocationForm-label {
-  display: block;
-  font-weight: bold;
-  margin: 0 0 10px 0;
-  padding: 0 0 5px 0;
-  border-bottom: 1px solid #ccc; }
-
-.LocationForm {
-  position: absolute;
-  box-sizing: border-box;
-  background: #fff;
-  width: 500px;
-  height: 550px;
-  margin-left: -250px;
-  margin-top: -275px;
-  top: 50%;
-  left: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
   z-index: 1000; }
 
 .LocationForm-inner {
   position: relative;
-  padding: 20px;
-  width: 100%;
-  height: 100%;
+  width: 660px;
+  background: #FFF;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 20px 20px 60px 20px;
+  box-sizing: border-box;
+  text-align: left; }
+
+.LocationForm-content {
+  display: none;
+  margin: auto;
+  font-family: 'Open sans', sans-serif;
+  font-size: 15px;
+  font-weight: 300; }
+
+.LocationForm-inner {
+  box-sizing: border-box;
+  background: #fff;
+  width: 500px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  z-index: 1000;
   box-sizing: border-box; }
 
 .LocationForm-fields {
@@ -603,7 +560,20 @@ a {
   box-sizing: border-box;
   width: 100%; }
 
-/*# sourceMappingURL=location_form.css.map */
+.LocationForm-fields {
+  font-family: 'Open Sans', sans-serif; }
+
+.LocationForm-field {
+  margin: 0 0 20px 0; }
+
+.LocationForm-label {
+  display: block;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  padding: 0 0 5px 0;
+  border-bottom: 1px solid #ccc; }
+
+/*# sourceMappingURL=location.css.map */
 
 .LocationInformation {
   font-family: 'Open Sans', sans-serif; }
@@ -723,7 +693,7 @@ a {
 .Page.is-hidden {
   display: none; }
 
-.Page-inner {
+.Page-content {
   position: relative;
   width: 700px;
   height: 500px;
@@ -734,7 +704,7 @@ a {
   padding: 25px 10px 20px 20px;
   box-sizing: border-box; }
 
-.Page-content {
+.Page-inner {
   width: 100%;
   height: 450px;
   font-family: 'Open sans', sans-serif;

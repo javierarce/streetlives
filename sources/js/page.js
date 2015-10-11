@@ -5,10 +5,7 @@ var Page = SL.Dialog.extend({
   className: 'Page is-hidden',
 
   templateName: 'page',
+  templateContentName: 'page_content'
 
-  render: function() {
-    this._super('render', arguments);
-    return this;
-  }
 });
 

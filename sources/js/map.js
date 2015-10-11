@@ -34,7 +34,7 @@ var MapView = SL.View.extend({
   },
 
   initialize: function() {
-    _.bindAll(this, '_onClickMap', '_onFeatureClick', '_onVisLoaded', '_onFetchOfferings');
+    _.bindAll(this, '_onClickMap', '_onFeatureClick', '_onVisLoaded');
 
     this.model = new Backbone.Model({
       marker: null
@@ -44,7 +44,7 @@ var MapView = SL.View.extend({
     this.geocoder = new google.maps.Geocoder();
 
     this.offerings = new Offerings();
-    this.offerings.fetch({ success: this._onFetchOfferings });
+    this.offerings.fetch();
 
     this.search = new Search();
     this.search.bind('goto_place', this._gotoPlace, this);
@@ -112,17 +112,7 @@ var MapView = SL.View.extend({
     }
 
     this.map.closePopup();
-    console.log(data);
     this.locationInformation.open(data);
-  },
-
-  _onFetchOfferings: function() {
-    this.locationForm = new LocationForm({
-      offerings: this.offerings
-    });
-
-    this.locationForm.bind('add_location', this._onAddLocation, this);
-    this.$el.append(this.locationForm.render().$el);
   },
 
   _onClickMap: function(e) {
@@ -152,11 +142,16 @@ var MapView = SL.View.extend({
     this._killEvent(e);
     this.addLocation.hide();
     this.map.removeLayer(this.popup);
-    this.locationForm.open({
+
+    this.locationForm = new LocationForm({
+      offerings: this.offerings,
       name: this.model.get('name'),
       coordinates: this.model.get('coordinates'),
       address: this.model.get('address')
     });
+
+    this.locationForm.bind('add_location', this._onAddLocation, this);
+    this.locationForm.open();
   },
 
   _onFinishedGeocoding: function(coordinates, place, results, status) {

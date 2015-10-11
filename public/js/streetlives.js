@@ -285,13 +285,23 @@ this["JST"]["sources/templates/dialog.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="Dialog-inner">\n  <div class="Dialog-content">\n    <h2>' +
+__p += '<div class="Dialog-inner js-content"></div>\n';
+
+}
+return __p
+};
+
+this["JST"]["sources/templates/dialog_content.jst.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="Dialog-content">\n  <h2>' +
 __e( title ) +
-'</h2>\n    <p>' +
+'</h2>\n  <p>' +
 __e( text ) +
-'</p>\n  </div>\n  <footer class="Footer">\n    <button class="Button js-ok">' +
+'</p>\n</div>\n<footer class="Footer">\n  <button class="Button js-ok">' +
 __e( ok_button ) +
-'</button>\n  </footer>\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n\n';
+'</button>\n</footer>\n<button class="Button Button--close js-cancel">✕</button>\n';
 
 }
 return __p
@@ -313,10 +323,20 @@ return __p
 
 this["JST"]["sources/templates/location_form.jst.ejs"] = function(obj) {
 obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="LocationForm-inner js-content"></div>\n';
+
+}
+return __p
+};
+
+this["JST"]["sources/templates/location_form_content.jst.ejs"] = function(obj) {
+obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class="LocationForm-inner">\n  <ul class="LocationForm-fields">\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Address</label>\n      <span class="js-address">' +
+__p += '<div class="LocationForm-content js-content">\n  <ul class="LocationForm-fields">\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Address</label>\n      <span class="js-address">' +
 __e( address ) +
 '</span>\n    </li>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Name</label>\n      <div class="InputField js-field">\n        <input type="text" placeholder="Name of this location" class="Input js-name" value="' +
 __e( name ) +
@@ -332,9 +352,9 @@ __e(offering.get('cartodb_id') ) +
 __e( offering.get('name') ) +
 '\n          </label>\n        </li>\n        ';
  }); ;
-__p += '\n      </ul>\n    </li>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your comment</label>\n      <div class="InputField js-field">\n        <textarea placeholder="Your comment" class="Input InputArea js-comment"></textarea>\n      </div>\n    </li>\n  </ul>\n\n  <footer class="Footer">\n    <button class="Button js-ok is-disabled">' +
+__p += '\n      </ul>\n    </li>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your comment</label>\n      <div class="InputField js-field">\n        <textarea placeholder="Your comment" class="Input InputArea js-comment"></textarea>\n      </div>\n    </li>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your name or initials (optional)</label>\n      <div class="InputField js-field">\n        <input type="text" class="Input js-username" value="" />\n      </div>\n    </li>\n\n  </ul>\n\n  <footer class="Footer">\n    <button class="Button js-ok is-disabled">' +
 __e( title ) +
-'</button>\n  </footer>\n\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n';
+'</button>\n  </footer>\n\n  <button class="Button Button--close js-cancel">✕</button>\n\n</div>\n';
 
 }
 return __p
@@ -365,9 +385,19 @@ this["JST"]["sources/templates/page.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="Page-inner">\n  <div class="Page-content">\n    <div class="scroll-pane js-scroll">\n      <p>' +
+__p += '<div class="Page-content js-content"></div>\n';
+
+}
+return __p
+};
+
+this["JST"]["sources/templates/page_content.jst.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="Page-inner">\n  <div class="scroll-pane js-scroll">\n    <p>' +
 __e( text ) +
-'</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n      <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    </div>\n  </div>\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n\n';
+'</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n    <p>Elit veniam nam dicta maiores enim laboriosam minima sed! Repellendus autem sunt esse eos at nulla officia! Id dolores rerum nulla nostrum totam ducimus tempora nihil voluptatum aspernatur perspiciatis temporibus!</p>\n  </div>\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n';
 
 }
 return __p
@@ -779,6 +809,7 @@ SL.Dialog = SL.View.extend({
   },
 
   templateName: 'dialog',
+  templateContentName: 'dialog_content',
 
   initialize: function(options) {
 
@@ -788,14 +819,21 @@ SL.Dialog = SL.View.extend({
 
     this.options = options;
     this.template = this._getTemplate(this.templateName);
+    this.templateContent = this._getTemplate(this.templateContentName);
 
     this._setupModel();
   },
 
-  render: function() {
+  render_content: function() {
     var attributes = this.model.attributes;
-    this.$el.append(this.template(attributes));
+    this.$('.js-content').append(this.templateContent(attributes));
     this._initScroll();
+    return this;
+  },
+
+  render: function() {
+    this.$el.append(this.template());
+    this.render_content();
     return this;
   },
 
@@ -824,7 +862,10 @@ SL.Dialog = SL.View.extend({
     this.api = this.$('.js-scroll').jScrollPane().data('jsp');
 
     if (this.api) {
-      this.api.reinitialise();
+      var self = this;
+      setTimeout(function() {
+        self.api.reinitialise();
+      }, 500);
     }
   },
 
@@ -841,6 +882,10 @@ SL.Dialog = SL.View.extend({
 
   hide: function() {
     this.model.set('hidden', true);
+  },
+
+  isOpen: function() {
+    return !this.model.get('hidden');
   },
 
   close: function() {
@@ -902,7 +947,7 @@ var Header = SL.View.extend({
 
 'use strict';
 
-var LocationForm = SL.View.extend({
+var LocationForm = SL.Dialog.extend({
 
   _TEXT: {
     title: 'Add location'
@@ -914,30 +959,27 @@ var LocationForm = SL.View.extend({
     'keyup .js-name': '_onKeyUpName'
   },
 
+  templateName: 'location_form',
+  templateContentName: 'location_form_content',
+
   className: 'LocationForm is-hidden',
 
   initialize: function(options) {
-    this.options = options;
-
-    _.bindAll(this, '_onKeyUp');
-
-    this._setupModel();
+    this._super('initialize', arguments);
     this._setupLocation();
-
-    this.template = this._getTemplate('location_form');
   },
 
-  render: function() {
-    var options = _.extend({ title: this._TEXT.title }, this.location.attributes);
-    this.$el.append(this.template(options));
+  render_content: function() {
+    var attributes = _.extend({ title: this._TEXT.title }, this.location.attributes);
+    this.$('.js-content').append(this.templateContent(attributes));
     return this;
   },
 
   _setupModel: function() {
-    this.model = new SL.Model({
+    this.model = new SL.Model(_.extend({
       enabled: false,
       hidden: true
-    });
+    }, this.options));
 
     this.model.bind('change:enabled', this._onChangeEnabled, this);
     this.model.bind('change:hidden', this._onChangeHidden, this);
@@ -1017,20 +1059,16 @@ var LocationForm = SL.View.extend({
 
   _show: function() {
     var self = this;
-    this.$el.fadeIn(150, function() {
+    this.$('.js-content').fadeIn(150, function() {
       self.model.set('hidden', false);
-    })
+    });
   },
 
   _hide: function() {
     var self = this;
-    this.$el.fadeOut(150, function() {
+    this.$('.js-content').fadeOut(150, function() {
       self.model.set('hidden', true);
     });
-  },
-
-  isOpen: function() {
-    return !this.model.get('hidden');
   },
 
   _focus: function() {
@@ -1041,9 +1079,9 @@ var LocationForm = SL.View.extend({
     }, 200);
   },
 
-  open: function(options) {
+  open: function() {
     $(document).on("keyup", this._onKeyUp);
-    this.location.set(options);
+    $('body').append(this.render().$el);
     this._show();
     this._focus();
   },
@@ -1220,7 +1258,7 @@ var MapView = SL.View.extend({
   },
 
   initialize: function() {
-    _.bindAll(this, '_onClickMap', '_onFeatureClick', '_onVisLoaded', '_onFetchOfferings');
+    _.bindAll(this, '_onClickMap', '_onFeatureClick', '_onVisLoaded');
 
     this.model = new Backbone.Model({
       marker: null
@@ -1230,7 +1268,7 @@ var MapView = SL.View.extend({
     this.geocoder = new google.maps.Geocoder();
 
     this.offerings = new Offerings();
-    this.offerings.fetch({ success: this._onFetchOfferings });
+    this.offerings.fetch();
 
     this.search = new Search();
     this.search.bind('goto_place', this._gotoPlace, this);
@@ -1298,17 +1336,7 @@ var MapView = SL.View.extend({
     }
 
     this.map.closePopup();
-    console.log(data);
     this.locationInformation.open(data);
-  },
-
-  _onFetchOfferings: function() {
-    this.locationForm = new LocationForm({
-      offerings: this.offerings
-    });
-
-    this.locationForm.bind('add_location', this._onAddLocation, this);
-    this.$el.append(this.locationForm.render().$el);
   },
 
   _onClickMap: function(e) {
@@ -1338,11 +1366,16 @@ var MapView = SL.View.extend({
     this._killEvent(e);
     this.addLocation.hide();
     this.map.removeLayer(this.popup);
-    this.locationForm.open({
+
+    this.locationForm = new LocationForm({
+      offerings: this.offerings,
       name: this.model.get('name'),
       coordinates: this.model.get('coordinates'),
       address: this.model.get('address')
     });
+
+    this.locationForm.bind('add_location', this._onAddLocation, this);
+    this.locationForm.open();
   },
 
   _onFinishedGeocoding: function(coordinates, place, results, status) {
@@ -1438,11 +1471,8 @@ var Page = SL.Dialog.extend({
   className: 'Page is-hidden',
 
   templateName: 'page',
+  templateContentName: 'page_content'
 
-  render: function() {
-    this._super('render', arguments);
-    return this;
-  }
 });
 
 

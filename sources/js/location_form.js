@@ -1,6 +1,6 @@
 'use strict';
 
-var LocationForm = SL.View.extend({
+var LocationForm = SL.Dialog.extend({
 
   _TEXT: {
     title: 'Add location'
@@ -12,30 +12,27 @@ var LocationForm = SL.View.extend({
     'keyup .js-name': '_onKeyUpName'
   },
 
+  templateName: 'location_form',
+  templateContentName: 'location_form_content',
+
   className: 'LocationForm is-hidden',
 
   initialize: function(options) {
-    this.options = options;
-
-    _.bindAll(this, '_onKeyUp');
-
-    this._setupModel();
+    this._super('initialize', arguments);
     this._setupLocation();
-
-    this.template = this._getTemplate('location_form');
   },
 
-  render: function() {
-    var options = _.extend({ title: this._TEXT.title }, this.location.attributes);
-    this.$el.append(this.template(options));
+  render_content: function() {
+    var attributes = _.extend({ title: this._TEXT.title }, this.location.attributes);
+    this.$('.js-content').append(this.templateContent(attributes));
     return this;
   },
 
   _setupModel: function() {
-    this.model = new SL.Model({
+    this.model = new SL.Model(_.extend({
       enabled: false,
       hidden: true
-    });
+    }, this.options));
 
     this.model.bind('change:enabled', this._onChangeEnabled, this);
     this.model.bind('change:hidden', this._onChangeHidden, this);
@@ -115,20 +112,16 @@ var LocationForm = SL.View.extend({
 
   _show: function() {
     var self = this;
-    this.$el.fadeIn(150, function() {
+    this.$('.js-content').fadeIn(150, function() {
       self.model.set('hidden', false);
-    })
+    });
   },
 
   _hide: function() {
     var self = this;
-    this.$el.fadeOut(150, function() {
+    this.$('.js-content').fadeOut(150, function() {
       self.model.set('hidden', true);
     });
-  },
-
-  isOpen: function() {
-    return !this.model.get('hidden');
   },
 
   _focus: function() {
@@ -139,9 +132,9 @@ var LocationForm = SL.View.extend({
     }, 200);
   },
 
-  open: function(options) {
+  open: function() {
     $(document).on("keyup", this._onKeyUp);
-    this.location.set(options);
+    $('body').append(this.render().$el);
     this._show();
     this._focus();
   },

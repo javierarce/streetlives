@@ -13,7 +13,7 @@
 .Page.is-hidden {
   display: none; }
 
-.Page-inner {
+.Page-content {
   position: relative;
   width: 700px;
   height: 500px;
@@ -24,7 +24,7 @@
   padding: 25px 10px 20px 20px;
   box-sizing: border-box; }
 
-.Page-content {
+.Page-inner {
   width: 100%;
   height: 450px;
   font-family: 'Open sans', sans-serif;

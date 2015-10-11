@@ -12,8 +12,6 @@ var CommentView = SL.View.extend({
   initialize: function(options) {
     this.options = options;
     this.model = this.options.model;
-
-    console.log(this.model.attributes);
     this.template = this._getTemplate('comment');
   },
 

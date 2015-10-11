@@ -10,7 +10,6 @@ var Router = Backbone.Router.extend({
   },
 
   map: function() {
-    console.log('map');
   },
 
   about: function() {

@@ -322,7 +322,7 @@ __p += '<a href="' +
 __e( url ) +
 '" class="HeaderTitle">\n  ' +
 __e( title ) +
-'\n</a>\n\n<ul class="HeaderItems">\n  <li class="HeaderItem"><button class="HeaderItem-link is-selected js-map">Map</button></li>\n  <li class="HeaderItem"><button class="HeaderItem-link js-about">About</button></li>\n  <li class="HeaderItem"><button class="HeaderItem-link js-privacy">Privacy</button></li>\n</ul>\n';
+'\n</a>\n\n<ul class="HeaderItems">\n  <li class="HeaderItem"><button class="HeaderItem-link is-selected js-item js-map">Map</button></li>\n  <li class="HeaderItem"><button class="HeaderItem-link js-item js-about">About</button></li>\n  <li class="HeaderItem"><button class="HeaderItem-link js-item js-privacy">Privacy</button></li>\n</ul>\n';
 
 }
 return __p
@@ -673,8 +673,6 @@ var CommentView = SL.View.extend({
   initialize: function(options) {
     this.options = options;
     this.model = this.options.model;
-
-    console.log(this.model.attributes);
     this.template = this._getTemplate('comment');
   },
 
@@ -927,8 +925,14 @@ var Header = SL.View.extend({
 
   initialize: function(options) {
     this.options = options;
+    _.bindAll(this, '_onOpenMap', '_onOpenAbout', '_onOpenPrivacy');
+
     this.template = this._getTemplate('header');
+
     this.router = this.options.router;
+    this.router.on("route:about", this._onOpenAbout, this);
+    this.router.on("route:privacy", this._onOpenPrivacy, this);
+    this.router.on("route:map", this._onOpenMap, this);
   },
 
   render: function() {
@@ -939,6 +943,21 @@ var Header = SL.View.extend({
 
     this.$el.append(this.template(options));
     return this;
+  },
+
+  _onOpenMap: function() {
+    this.$('.js-item').removeClass('is-selected');
+    this.$('.js-map').addClass('is-selected');
+  },
+
+  _onOpenAbout: function() {
+    this.$('.js-item').removeClass('is-selected');
+    this.$('.js-about').addClass('is-selected');
+  },
+
+  _onOpenPrivacy: function() {
+    this.$('.js-item').removeClass('is-selected');
+    this.$('.js-privacy').addClass('is-selected');
   },
 
   _onClickMap: function() {
@@ -1482,7 +1501,6 @@ var Router = Backbone.Router.extend({
   },
 
   map: function() {
-    console.log('map');
   },
 
   about: function() {

@@ -295,7 +295,7 @@ this["JST"]["sources/templates/dialog_content.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="Dialog-content">\n  <h2>' +
+__p += '<div class="Dialog-content">\n  <div class="Dialog-logo"></div>\n  <h2>' +
 __e( title ) +
 '</h2>\n  <p>' +
 __e( text ) +
@@ -1037,11 +1037,12 @@ var LocationForm = SL.Dialog.extend({
     });
 
     var name = this.$('.js-name').val();
+    var username = this.$('.js-username').val();
     var comment = this.$('.js-comment').val();
 
     var self = this;
 
-    this.location.save({ name: name, comment: comment, offerings: ids }, {
+    this.location.save({ name: name, comment: comment, username: username, offerings: ids }, {
       success: function() {
       self.trigger('add_location', this.location, this);
       self.close();

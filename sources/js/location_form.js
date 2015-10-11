@@ -90,11 +90,12 @@ var LocationForm = SL.Dialog.extend({
     });
 
     var name = this.$('.js-name').val();
+    var username = this.$('.js-username').val();
     var comment = this.$('.js-comment').val();
 
     var self = this;
 
-    this.location.save({ name: name, comment: comment, offerings: ids }, {
+    this.location.save({ name: name, comment: comment, username: username, offerings: ids }, {
       success: function() {
       self.trigger('add_location', this.location, this);
       self.close();

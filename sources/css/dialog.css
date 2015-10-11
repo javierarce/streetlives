@@ -15,7 +15,7 @@
 
 .Dialog-inner {
   position: relative;
-  width: 660px;
+  width: 560px;
   background: #FFF;
   border: 1px solid transparent;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -35,7 +35,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 20px;
+  padding: 30px;
   text-align: center;
   box-sizing: border-box;
   width: 100%; }
@@ -51,5 +51,11 @@
   font-size: 14px;
   color: #444444;
   line-height: 26px; }
+
+.Dialog-logo {
+  background: url(/img/confirmation-icon.png) no-repeat;
+  width: 82px;
+  height: 82px;
+  margin: auto auto 10px auto; }
 
 /*# sourceMappingURL=dialog.css.map */

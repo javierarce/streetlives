@@ -50,7 +50,7 @@ this["JST"]["sources/templates/dialog_content.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="Dialog-content">\n  <h2>' +
+__p += '<div class="Dialog-content">\n  <div class="Dialog-logo"></div>\n  <h2>' +
 __e( title ) +
 '</h2>\n  <p>' +
 __e( text ) +

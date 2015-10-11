@@ -51,8 +51,6 @@ var MapView = SL.View.extend({
 
     this.addLocation = new Button({ title: 'Add Location' });
     this.addLocation.bind('click', this._onClickAddLocation, this);
-
-    this.locationInformation = new LocationInformation();
   },
 
   render: function() {
@@ -72,12 +70,11 @@ var MapView = SL.View.extend({
 
     var sublayer = layer.getSubLayer(0);
 
-    var query = "SELECT l.*, string_agg(o.name, ', ') as offerings, COALESCE(sum(CASE WHEN liked THEN 0 ELSE 1 END), 0) as x, COALESCE(sum(CASE WHEN liked THEN 1 ELSE 0 END),0) as p, COUNT(NULLIF(liked, false)) as likes, COUNT(NULLIF(liked, true)) as dislikes FROM locations AS l LEFT OUTER JOIN locations_offerings AS lo ON lo.location_id = l.cartodb_id ";
-    query += "LEFT OUTER JOIN offerings as o ON o.cartodb_id = lo.offering_id LEFT OUTER JOIN comments as c ON c.location_id = l.cartodb_id GROUP BY l.cartodb_id ";
+    var query = "SELECT l.*, string_agg(o.name, ', ') as offerings FROM locations AS l LEFT OUTER JOIN locations_offerings AS lo ON lo.location_id = l.cartodb_id LEFT OUTER JOIN offerings as o ON o.cartodb_id = lo.offering_id GROUP BY l.cartodb_id";
 
     layer.setQuery(query);
     sublayer.setInteraction(true);
-    sublayer.setInteractivity('cartodb_id, name, offerings, address, likes, dislikes, p, x');
+    sublayer.setInteractivity('cartodb_id, name, offerings, address');
 
     layer.on('mouseover',    this._onMouseOver);
     layer.on('mouseout',     this._onMouseOut);
@@ -91,8 +88,6 @@ var MapView = SL.View.extend({
     this.map = vis.getNativeMap();
     this.map.on('click', this._onClickMap);
     this.$el.append(this.search.render().$el);
-
-    this.$el.append(this.locationInformation.render().$el);
   },
 
   _onMouseOut: function() {
@@ -112,7 +107,9 @@ var MapView = SL.View.extend({
     }
 
     this.map.closePopup();
-    this.locationInformation.open(data);
+
+    this.locationInformation = new LocationInformation(data);
+    this.locationInformation.open();
   },
 
   _onClickMap: function(e) {

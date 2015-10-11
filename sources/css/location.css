@@ -12,14 +12,18 @@
 
 .LocationForm-inner {
   position: relative;
-  width: 660px;
   background: #FFF;
   border: 1px solid transparent;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
   padding: 20px 20px 60px 20px;
   box-sizing: border-box;
-  text-align: left; }
+  text-align: left;
+  box-sizing: border-box;
+  background: #fff;
+  width: 500px;
+  border-radius: 2px;
+  z-index: 1000;
+  box-sizing: border-box; }
 
 .LocationForm-content {
   display: none;
@@ -27,15 +31,6 @@
   font-family: 'Open sans', sans-serif;
   font-size: 15px;
   font-weight: 300; }
-
-.LocationForm-inner {
-  box-sizing: border-box;
-  background: #fff;
-  width: 500px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
-  z-index: 1000;
-  box-sizing: border-box; }
 
 .LocationForm-fields {
   font-family: 'Open sans', sans-serif; }

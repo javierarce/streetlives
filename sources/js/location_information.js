@@ -1,6 +1,6 @@
 'use strict';
 
-var LocationInformation = SL.View.extend({
+var LocationInformation = SL.Dialog.extend({
 
   _TEXT: {
     title: 'Add location'
@@ -10,24 +10,24 @@ var LocationInformation = SL.View.extend({
     'click .js-cancel': 'close'
   },
 
+  templateName: 'location_information',
+  templateContentName: 'location_information_content',
+
   className: 'LocationInformation is-hidden',
 
   initialize: function(options) {
-    this.options = options;
-
-    _.bindAll(this, '_onKeyUp');
-
-    this._setupModel();
+    this._super('initialize', arguments);
     this._setupLocation();
-
-    this.template = this._getTemplate('location_information');
   },
 
-  render: function() {
-    this.$el.empty();
+  render_content: function() {
     var options = _.extend({ title: this._TEXT.title }, this.location.attributes);
 
-    this.$el.append(this.template(options));
+    this.$('.js-content').append(this.templateContent(options));
+
+    this.comments = new CommentsView({ location_id: options.cartodb_id });
+    this.comments.render();
+    this.comments.bind('comment', this._onComment, this);
 
     if (this.comments) {
       this.$('.js-fields').append(this.comments.$el);
@@ -71,12 +71,6 @@ var LocationInformation = SL.View.extend({
     this.$('.js-address').text(this.location.get('address'));
   },
 
-  _onKeyUp: function(e) {
-    if (e.keyCode === 27) {
-      this.close();
-    }
-  },
-
   _clear: function() {
     this.$('.js-checkbox').attr('checked', false);
     this.$(".js-field").removeClass('has-error');
@@ -85,14 +79,14 @@ var LocationInformation = SL.View.extend({
 
   _show: function() {
     var self = this;
-    this.$el.fadeIn(150, function() {
+    this.$('.js-content').fadeIn(150, function() {
       self.model.set('hidden', false);
-    })
+    });
   },
 
   _hide: function() {
     var self = this;
-    this.$el.fadeOut(150, function() {
+    this.$('.js-content').fadeOut(150, function() {
       self.model.set('hidden', true);
     });
   },
@@ -103,18 +97,9 @@ var LocationInformation = SL.View.extend({
     success.open();
   },
 
-  isOpen: function() {
-    return !this.model.get('hidden');
-  },
-
   open: function(options) {
     $(document).on("keyup", this._onKeyUp);
-
-    this.comments = new CommentsView({ location_id: options.cartodb_id });
-    this.comments.render();
-    this.comments.bind('comment', this._onComment, this);
-    this.location.clear().set(_.extend({ offerings: '' }, options));
-    this.render();
+    $('body').append(this.render().$el);
     this._show();
   },
 
@@ -122,6 +107,7 @@ var LocationInformation = SL.View.extend({
     $(document).off("keyup", this._onKeyUp);
     this._hide();
     this._clear();
+    this.$el.remove();
   }
 });
 

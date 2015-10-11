@@ -91,6 +91,7 @@ SL.Dialog = SL.View.extend({
   close: function() {
     this.hide();
     this.trigger('close', this);
+    this.$el.remove();
   },
 
   _onKeyUp: function(e) {

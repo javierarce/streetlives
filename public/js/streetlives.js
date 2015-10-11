@@ -259,13 +259,20 @@ return __p
 
 this["JST"]["sources/templates/comment.jst.ejs"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<p>\n  <span class=\'CommentList-itemDate\'>' +
 __e( moment(created_at).format('MMMM Do YYYY') ) +
 '</span>\n  ' +
 __e( comment ) +
-'\n</p>\n';
+'\n  ';
+ if (username) { ;
+__p += ' <div class="CommentList-username">' +
+__e( username ) +
+'</div> ';
+ } ;
+__p += '\n</p>\n';
 
 }
 return __p
@@ -275,7 +282,7 @@ this["JST"]["sources/templates/comments.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments">\n    <label class="LocationInformation-label">Comments</label>\n    <ul class="CommentList js-comment-list scroll-pane"></ul>\n  </div>\n  <div class="Comments-form">\n    <label class="LocationInformation-label">Do you have something to add?</label>\n    <div class="InputField InputField-area js-field">\n      <textarea placeholder="Feel free to comment" class="Input InputArea js-comment"></textarea>\n    </div>\n\n    <div class="LikeButtons">\n      <p class="LikeButtons-title">Recommend?</p>\n      <ul class="LikeButtons-list">\n        <li class="LikeButtons-listItem"><button class="LikeButton js-like" data-value="1"></button></li>\n        <li class="LikeButtons-listItem"><button class="LikeButton LikeButton--dislike js-like" data-value="0"></button></li>\n      </ul>\n    </div>\n    \n    <button class="Button is-disabled js-ok">Add comment</button>\n  </div>\n</div>\n';
+__p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments">\n    <label class="LocationInformation-label">Comments</label>\n    <ul class="CommentList js-comment-list scroll-pane"></ul>\n  </div>\n  <div class="Comments-form">\n    <label class="LocationInformation-label">Do you have something to add?</label>\n    <div class="InputField InputField-area js-field">\n      <textarea placeholder="Feel free to comment" class="Input InputArea js-comment"></textarea>\n    </div>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your name or initials (optional)</label>\n      <div class="InputField js-field">\n        <input type="text" class="Input js-username" value="" />\n      </div>\n    </li>\n\n    <div class="LikeButtons">\n      <p class="LikeButtons-title">Recommend?</p>\n      <ul class="LikeButtons-list">\n        <li class="LikeButtons-listItem"><button class="LikeButton js-like" data-value="1"></button></li>\n        <li class="LikeButtons-listItem"><button class="LikeButton LikeButton--dislike js-like" data-value="0"></button></li>\n      </ul>\n    </div>\n    \n    <button class="Button is-disabled js-ok">Add comment</button>\n  </div>\n</div>\n';
 
 }
 return __p
@@ -362,10 +369,20 @@ return __p
 
 this["JST"]["sources/templates/location_information.jst.ejs"] = function(obj) {
 obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="LocationInformation-inner js-content"></div>\n';
+
+}
+return __p
+};
+
+this["JST"]["sources/templates/location_information_content.jst.ejs"] = function(obj) {
+obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class="LocationInformation-inner">\n\n  <div class="LocationInformation-title">\n    <h2 class="LocationInformation-name">' +
+__p += '<div class="LocationInformation-content">\n\n  <div class="LocationInformation-title">\n    <h2 class="LocationInformation-name">' +
 __e( name ) +
 '</h2>\n    <h4 class="LocationInformation-address">' +
 __e( address ) +
@@ -668,6 +685,8 @@ var CommentView = SL.View.extend({
   initialize: function(options) {
     this.options = options;
     this.model = this.options.model;
+
+    console.log(this.model.attributes);
     this.template = this._getTemplate('comment');
   },
 
@@ -786,6 +805,8 @@ var CommentsView = SL.View.extend({
       }
     }, this);
 
+
+    this.comment.set({ comment: this.$('.js-comment').val(), username: this.$('.js-username').val() });
     this.comments.add(this.comment);
 
     var self = this;
@@ -891,6 +912,7 @@ SL.Dialog = SL.View.extend({
   close: function() {
     this.hide();
     this.trigger('close', this);
+    this.$el.remove();
   },
 
   _onKeyUp: function(e) {
@@ -1097,7 +1119,7 @@ var LocationForm = SL.Dialog.extend({
 
 'use strict';
 
-var LocationInformation = SL.View.extend({
+var LocationInformation = SL.Dialog.extend({
 
   _TEXT: {
     title: 'Add location'
@@ -1107,24 +1129,24 @@ var LocationInformation = SL.View.extend({
     'click .js-cancel': 'close'
   },
 
+  templateName: 'location_information',
+  templateContentName: 'location_information_content',
+
   className: 'LocationInformation is-hidden',
 
   initialize: function(options) {
-    this.options = options;
-
-    _.bindAll(this, '_onKeyUp');
-
-    this._setupModel();
+    this._super('initialize', arguments);
     this._setupLocation();
-
-    this.template = this._getTemplate('location_information');
   },
 
-  render: function() {
-    this.$el.empty();
+  render_content: function() {
     var options = _.extend({ title: this._TEXT.title }, this.location.attributes);
 
-    this.$el.append(this.template(options));
+    this.$('.js-content').append(this.templateContent(options));
+
+    this.comments = new CommentsView({ location_id: options.cartodb_id });
+    this.comments.render();
+    this.comments.bind('comment', this._onComment, this);
 
     if (this.comments) {
       this.$('.js-fields').append(this.comments.$el);
@@ -1168,12 +1190,6 @@ var LocationInformation = SL.View.extend({
     this.$('.js-address').text(this.location.get('address'));
   },
 
-  _onKeyUp: function(e) {
-    if (e.keyCode === 27) {
-      this.close();
-    }
-  },
-
   _clear: function() {
     this.$('.js-checkbox').attr('checked', false);
     this.$(".js-field").removeClass('has-error');
@@ -1182,14 +1198,14 @@ var LocationInformation = SL.View.extend({
 
   _show: function() {
     var self = this;
-    this.$el.fadeIn(150, function() {
+    this.$('.js-content').fadeIn(150, function() {
       self.model.set('hidden', false);
-    })
+    });
   },
 
   _hide: function() {
     var self = this;
-    this.$el.fadeOut(150, function() {
+    this.$('.js-content').fadeOut(150, function() {
       self.model.set('hidden', true);
     });
   },
@@ -1200,18 +1216,9 @@ var LocationInformation = SL.View.extend({
     success.open();
   },
 
-  isOpen: function() {
-    return !this.model.get('hidden');
-  },
-
   open: function(options) {
     $(document).on("keyup", this._onKeyUp);
-
-    this.comments = new CommentsView({ location_id: options.cartodb_id });
-    this.comments.render();
-    this.comments.bind('comment', this._onComment, this);
-    this.location.clear().set(_.extend({ offerings: '' }, options));
-    this.render();
+    $('body').append(this.render().$el);
     this._show();
   },
 
@@ -1219,6 +1226,7 @@ var LocationInformation = SL.View.extend({
     $(document).off("keyup", this._onKeyUp);
     this._hide();
     this._clear();
+    this.$el.remove();
   }
 });
 
@@ -1276,8 +1284,6 @@ var MapView = SL.View.extend({
 
     this.addLocation = new Button({ title: 'Add Location' });
     this.addLocation.bind('click', this._onClickAddLocation, this);
-
-    this.locationInformation = new LocationInformation();
   },
 
   render: function() {
@@ -1297,12 +1303,11 @@ var MapView = SL.View.extend({
 
     var sublayer = layer.getSubLayer(0);
 
-    var query = "SELECT l.*, string_agg(o.name, ', ') as offerings, COALESCE(sum(CASE WHEN liked THEN 0 ELSE 1 END), 0) as x, COALESCE(sum(CASE WHEN liked THEN 1 ELSE 0 END),0) as p, COUNT(NULLIF(liked, false)) as likes, COUNT(NULLIF(liked, true)) as dislikes FROM locations AS l LEFT OUTER JOIN locations_offerings AS lo ON lo.location_id = l.cartodb_id ";
-    query += "LEFT OUTER JOIN offerings as o ON o.cartodb_id = lo.offering_id LEFT OUTER JOIN comments as c ON c.location_id = l.cartodb_id GROUP BY l.cartodb_id ";
+    var query = "SELECT l.*, string_agg(o.name, ', ') as offerings FROM locations AS l LEFT OUTER JOIN locations_offerings AS lo ON lo.location_id = l.cartodb_id LEFT OUTER JOIN offerings as o ON o.cartodb_id = lo.offering_id GROUP BY l.cartodb_id";
 
     layer.setQuery(query);
     sublayer.setInteraction(true);
-    sublayer.setInteractivity('cartodb_id, name, offerings, address, likes, dislikes, p, x');
+    sublayer.setInteractivity('cartodb_id, name, offerings, address');
 
     layer.on('mouseover',    this._onMouseOver);
     layer.on('mouseout',     this._onMouseOut);
@@ -1316,8 +1321,6 @@ var MapView = SL.View.extend({
     this.map = vis.getNativeMap();
     this.map.on('click', this._onClickMap);
     this.$el.append(this.search.render().$el);
-
-    this.$el.append(this.locationInformation.render().$el);
   },
 
   _onMouseOut: function() {
@@ -1337,7 +1340,9 @@ var MapView = SL.View.extend({
     }
 
     this.map.closePopup();
-    this.locationInformation.open(data);
+
+    this.locationInformation = new LocationInformation(data);
+    this.locationInformation.open();
   },
 
   _onClickMap: function(e) {

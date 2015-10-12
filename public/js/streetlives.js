@@ -282,7 +282,9 @@ this["JST"]["sources/templates/comments.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments">\n    <label class="LocationInformation-label">Comments</label>\n    <div class="js-likes"></div>\n    <ul class="CommentList js-comment-list scroll-pane"></ul>\n  </div>\n  <div class="Comments-form">\n    <label class="LocationInformation-label">Do you have something to add?</label>\n    <div class="InputField InputField-area js-field">\n      <textarea placeholder="Feel free to comment" class="Input InputArea js-comment"></textarea>\n    </div>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your name or initials (optional)</label>\n      <div class="InputField js-field">\n        <input type="text" class="Input js-username" value="" />\n      </div>\n    </li>\n\n    <div class="LikeButtons">\n      <p class="LikeButtons-title">Recommend?</p>\n      <ul class="LikeButtons-list">\n        <li class="LikeButtons-listItem"><button class="LikeButton js-like" data-value="1"></button></li>\n        <li class="LikeButtons-listItem"><button class="LikeButton LikeButton--dislike js-like" data-value="0"></button></li>\n      </ul>\n    </div>\n    \n    <button class="Button is-disabled js-ok">Add comment</button>\n  </div>\n</div>\n';
+__p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments">\n    <label class="LocationInformation-label">Comments</label>\n    <div class="js-likes"></div>\n    <ul class="CommentList js-comment-list scroll-pane"></ul>\n  </div>\n  <div class="Comments-form">\n    <label class="LocationInformation-label">Add something to the conversation!</label>\n    <div class="InputField InputField-area js-field">\n      <textarea placeholder="Feel free to add tips, warnings, comments or review about \'' +
+__e( name ) +
+'\'" class="Input InputArea js-comment"></textarea>\n    </div>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your name or initials (optional)</label>\n      <div class="InputField js-field">\n        <input type="text" class="Input js-username" value="" />\n      </div>\n    </li>\n\n    <div class="LikeButtons">\n      <p class="LikeButtons-title">Recommend?</p>\n      <ul class="LikeButtons-list">\n        <li class="LikeButtons-listItem"><button class="LikeButton js-like" data-value="1"></button></li>\n        <li class="LikeButtons-listItem"><button class="LikeButton LikeButton--dislike js-like" data-value="0"></button></li>\n      </ul>\n    </div>\n    \n    <button class="Button is-disabled js-ok">Add comment</button>\n  </div>\n</div>\n';
 
 }
 return __p
@@ -375,7 +377,7 @@ __e(offering.get('cartodb_id') ) +
 __e( offering.get('name') ) +
 '\n          </label>\n        </li>\n        ';
  }); ;
-__p += '\n      </ul>\n    </li>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your comment</label>\n      <div class="InputField js-field">\n        <textarea placeholder="Your comment" class="Input InputArea js-comment"></textarea>\n      </div>\n    </li>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your name or initials (optional)</label>\n      <div class="InputField js-field">\n        <input type="text" class="Input js-username" value="" />\n      </div>\n    </li>\n\n  </ul>\n\n  <footer class="Footer">\n    <button class="Button js-ok is-disabled">' +
+__p += '\n      </ul>\n    </li>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Add something to the conversation!</label>\n      <div class="InputField js-field">\n        <textarea placeholder="Feel free to add tips, warnings, comments or review about this place" class="Input InputArea js-comment"></textarea>\n      </div>\n    </li>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your name or initials (optional)</label>\n      <div class="InputField js-field">\n        <input type="text" class="Input js-username" value="" />\n      </div>\n    </li>\n\n  </ul>\n\n  <footer class="Footer">\n    <button class="Button js-ok is-disabled">' +
 __e( title ) +
 '</button>\n  </footer>\n\n  <button class="Button Button--close js-cancel">✕</button>\n\n</div>\n';
 
@@ -406,6 +408,12 @@ __e( address ) +
  if (offerings) { ;
 __p += '\n    <li class="LocationInformation-field">\n      <label class="LocationInformation-label">Can offer help with</label>\n      <p>' +
 __e( offerings ) +
+'</p>\n    </li>\n    ';
+ } ;
+__p += '\n    ';
+ if (description) { ;
+__p += '\n    <li class="LocationInformation-field">\n      <label class="LocationInformation-label">Description and tips</label>\n      <p>' +
+__e( description ) +
 '</p>\n    </li>\n    ';
  } ;
 __p += '\n  </ul>\n\n  <button class="Button Button--close js-cancel">✕</button>\n</div>\n';
@@ -744,7 +752,7 @@ var CommentsView = SL.View.extend({
   },
 
   render: function() {
-    this.$el.append(this.template({ comments: this.comments }));
+    this.$el.append(this.template({ name: this.options.name, comments: this.comments }));
     return this;
   },
 
@@ -1183,7 +1191,7 @@ var LocationInformation = SL.Dialog.extend({
 
     this.$('.js-content').append(this.templateContent(options));
 
-    this.comments = new CommentsView({ location_id: options.cartodb_id });
+    this.comments = new CommentsView({ name: options.name, location_id: options.cartodb_id });
     this.comments.render();
     this.comments.bind('comment', this._onComment, this);
 
@@ -1346,7 +1354,7 @@ var MapView = SL.View.extend({
 
     layer.setQuery(query);
     sublayer.setInteraction(true);
-    sublayer.setInteractivity('cartodb_id, name, offerings, address');
+    sublayer.setInteractivity('cartodb_id, name, description, offerings, address');
 
     layer.on('mouseover',    this._onMouseOver);
     layer.on('mouseout',     this._onMouseOut);

@@ -37,7 +37,7 @@
   margin: 0 0 20px 0; }
 
 .Comments-form .InputArea {
-  height: 200px; }
+  height: 150px; }
 
 .Comments-content {
   flex: 1;
@@ -45,7 +45,7 @@
 
 .Comments .scroll-pane {
   width: 100%;
-  height: 390px;
+  height: 325px;
   overflow: auto;
   outline: none; }
 

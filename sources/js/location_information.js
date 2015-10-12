@@ -25,7 +25,7 @@ var LocationInformation = SL.Dialog.extend({
 
     this.$('.js-content').append(this.templateContent(options));
 
-    this.comments = new CommentsView({ location_id: options.cartodb_id });
+    this.comments = new CommentsView({ name: options.name, location_id: options.cartodb_id });
     this.comments.render();
     this.comments.bind('comment', this._onComment, this);
 

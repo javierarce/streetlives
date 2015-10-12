@@ -74,7 +74,7 @@ var MapView = SL.View.extend({
 
     layer.setQuery(query);
     sublayer.setInteraction(true);
-    sublayer.setInteractivity('cartodb_id, name, offerings, address');
+    sublayer.setInteractivity('cartodb_id, name, description, offerings, address');
 
     layer.on('mouseover',    this._onMouseOver);
     layer.on('mouseout',     this._onMouseOut);

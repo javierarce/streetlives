@@ -59,7 +59,7 @@ var CommentsView = SL.View.extend({
   },
 
   render: function() {
-    this.$el.append(this.template({ comments: this.comments }));
+    this.$el.append(this.template({ name: this.options.name, comments: this.comments }));
     return this;
   },
 

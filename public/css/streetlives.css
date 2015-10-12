@@ -159,7 +159,7 @@ a {
   margin: 0 0 20px 0; }
 
 .Comments-form .InputArea {
-  height: 200px; }
+  height: 150px; }
 
 .Comments-content {
   flex: 1;
@@ -167,7 +167,7 @@ a {
 
 .Comments .scroll-pane {
   width: 100%;
-  height: 390px;
+  height: 327px;
   overflow: auto;
   outline: none; }
 
@@ -674,9 +674,9 @@ a {
 .LocationInformation-label {
   display: block;
   font-weight: bold;
-  margin: 0 0 10px 0;
+  margin: 0 0 5px 0;
   padding: 0 0 5px 0;
-  font-size: 15px; }
+  font-size: 14px; }
 
 /*# sourceMappingURL=location_information.css.map */
 

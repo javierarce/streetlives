@@ -1187,8 +1187,7 @@ var LocationInformation = SL.Dialog.extend({
   },
 
   render_content: function() {
-    var options = _.extend({ title: this._TEXT.title }, this.location.attributes);
-    console.log(this.location.attributes)
+    var options = _.extend({ title: this._TEXT.title, description: '' }, this.location.attributes);
 
     this.$('.js-content').append(this.templateContent(options));
 

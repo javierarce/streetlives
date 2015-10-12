@@ -750,7 +750,9 @@ var CommentsView = SL.View.extend({
 
   _renderLikes: function() {
     var likes = this.likes.at(0);
-    this.$('.js-likes').append(this.templateLikes(likes.attributes));
+    if (likes) {
+      this.$('.js-likes').append(this.templateLikes(likes.attributes));
+    }
   },
 
   _renderComments: function() {

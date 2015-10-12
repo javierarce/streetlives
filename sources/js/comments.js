@@ -6,9 +6,6 @@ var CommentView = SL.View.extend({
 
   className: 'CommentList-item',
 
-  events: {
-  },
-
   initialize: function(options) {
     this.options = options;
     this.model = this.options.model;
@@ -32,10 +29,11 @@ var CommentsView = SL.View.extend({
   },
 
   initialize: function(options) {
-    _.bindAll(this, '_onFetchComments');
+    _.bindAll(this, '_renderComments', '_renderLikes');
 
     this.options = options;
     this.template = this._getTemplate('comments');
+    this.templateLikes = this._getTemplate('likes');
 
     this.comment = new Comment({ location_id: this.options.location_id });
     this.comment.bind('change:liked', this._onChangeLiked, this);
@@ -45,17 +43,29 @@ var CommentsView = SL.View.extend({
 
     this._setupModel();
 
+    this.likes = new Likes();
+
+    this.likes.fetch({
+      data: { location_id: this.options.location_id },
+      success: this._renderLikes
+    });
+
     this.comments = new Comments();
 
     this.comments.fetch({
       data: { location_id: this.options.location_id },
-      success: this._onFetchComments
+      success: this._renderComments
     });
   },
 
   render: function() {
     this.$el.append(this.template({ comments: this.comments }));
     return this;
+  },
+
+  _renderLikes: function() {
+    var likes = this.likes.at(0);
+    this.$('.js-likes').append(this.templateLikes(likes.attributes));
   },
 
   _renderComments: function() {
@@ -91,10 +101,6 @@ var CommentsView = SL.View.extend({
 
   _onChangeEnabled: function() {
     this.$('.js-ok').toggleClass('is-disabled', !this.model.get('enabled'));
-  },
-
-  _onFetchComments: function() {
-    this._renderComments();
   },
 
   _isEnabled: function() {

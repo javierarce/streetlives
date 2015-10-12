@@ -282,7 +282,7 @@ this["JST"]["sources/templates/comments.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments">\n    <label class="LocationInformation-label">Comments</label>\n    <ul class="CommentList js-comment-list scroll-pane"></ul>\n  </div>\n  <div class="Comments-form">\n    <label class="LocationInformation-label">Do you have something to add?</label>\n    <div class="InputField InputField-area js-field">\n      <textarea placeholder="Feel free to comment" class="Input InputArea js-comment"></textarea>\n    </div>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your name or initials (optional)</label>\n      <div class="InputField js-field">\n        <input type="text" class="Input js-username" value="" />\n      </div>\n    </li>\n\n    <div class="LikeButtons">\n      <p class="LikeButtons-title">Recommend?</p>\n      <ul class="LikeButtons-list">\n        <li class="LikeButtons-listItem"><button class="LikeButton js-like" data-value="1"></button></li>\n        <li class="LikeButtons-listItem"><button class="LikeButton LikeButton--dislike js-like" data-value="0"></button></li>\n      </ul>\n    </div>\n    \n    <button class="Button is-disabled js-ok">Add comment</button>\n  </div>\n</div>\n';
+__p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments">\n    <label class="LocationInformation-label">Comments</label>\n    <div class="js-likes"></div>\n    <ul class="CommentList js-comment-list scroll-pane"></ul>\n  </div>\n  <div class="Comments-form">\n    <label class="LocationInformation-label">Do you have something to add?</label>\n    <div class="InputField InputField-area js-field">\n      <textarea placeholder="Feel free to comment" class="Input InputArea js-comment"></textarea>\n    </div>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your name or initials (optional)</label>\n      <div class="InputField js-field">\n        <input type="text" class="Input js-username" value="" />\n      </div>\n    </li>\n\n    <div class="LikeButtons">\n      <p class="LikeButtons-title">Recommend?</p>\n      <ul class="LikeButtons-list">\n        <li class="LikeButtons-listItem"><button class="LikeButton js-like" data-value="1"></button></li>\n        <li class="LikeButtons-listItem"><button class="LikeButton LikeButton--dislike js-like" data-value="0"></button></li>\n      </ul>\n    </div>\n    \n    <button class="Button is-disabled js-ok">Add comment</button>\n  </div>\n</div>\n';
 
 }
 return __p
@@ -323,6 +323,22 @@ __e( url ) +
 '" class="HeaderTitle">\n  ' +
 __e( title ) +
 '\n</a>\n\n<ul class="HeaderItems">\n  <li class="HeaderItem"><a href=\'/\' class="HeaderItem-link is-selected js-item js-map">Map</a></li>\n  <li class="HeaderItem"><a href=\'/about\' class="HeaderItem-link js-item js-about">About</a></li>\n  <li class="HeaderItem"><a href=\'/privacy\' class="HeaderItem-link js-item js-privacy">Privacy</a></li>\n</ul>\n';
+
+}
+return __p
+};
+
+this["JST"]["sources/templates/likes.jst.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<ul class="LikesList">\n  <li class="LikesList-item"><span class="LikesList-item--like">' +
+__e( likes ) +
+'</span></li>\n  <li class="LikesList-item"><span class="LikesList-item--dislike">' +
+__e( dislikes ) +
+'</span></li>\n  <li class="LikesList-item"><span class="LikesList-item--total">' +
+__e( total ) +
+'</span></li>\n</ul>\n';
 
 }
 return __p
@@ -539,6 +555,14 @@ var Comments = SL.Collection.extend({
   }
 });
 
+var Likes = SL.Collection.extend({
+  url: '/likes',
+
+  parse: function(response) {
+    return response.rows;
+  }
+});
+
 var Offering = SL.Model.extend();
 
 var Offerings = SL.Collection.extend({
@@ -667,9 +691,6 @@ var CommentView = SL.View.extend({
 
   className: 'CommentList-item',
 
-  events: {
-  },
-
   initialize: function(options) {
     this.options = options;
     this.model = this.options.model;
@@ -693,10 +714,11 @@ var CommentsView = SL.View.extend({
   },
 
   initialize: function(options) {
-    _.bindAll(this, '_onFetchComments');
+    _.bindAll(this, '_renderComments', '_renderLikes');
 
     this.options = options;
     this.template = this._getTemplate('comments');
+    this.templateLikes = this._getTemplate('likes');
 
     this.comment = new Comment({ location_id: this.options.location_id });
     this.comment.bind('change:liked', this._onChangeLiked, this);
@@ -706,17 +728,29 @@ var CommentsView = SL.View.extend({
 
     this._setupModel();
 
+    this.likes = new Likes();
+
+    this.likes.fetch({
+      data: { location_id: this.options.location_id },
+      success: this._renderLikes
+    });
+
     this.comments = new Comments();
 
     this.comments.fetch({
       data: { location_id: this.options.location_id },
-      success: this._onFetchComments
+      success: this._renderComments
     });
   },
 
   render: function() {
     this.$el.append(this.template({ comments: this.comments }));
     return this;
+  },
+
+  _renderLikes: function() {
+    var likes = this.likes.at(0);
+    this.$('.js-likes').append(this.templateLikes(likes.attributes));
   },
 
   _renderComments: function() {
@@ -752,10 +786,6 @@ var CommentsView = SL.View.extend({
 
   _onChangeEnabled: function() {
     this.$('.js-ok').toggleClass('is-disabled', !this.model.get('enabled'));
-  },
-
-  _onFetchComments: function() {
-    this._renderComments();
   },
 
   _isEnabled: function() {

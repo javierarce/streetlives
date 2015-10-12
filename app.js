@@ -39,6 +39,12 @@ App.get('/offerings', function(request, response) {
   });
 });
 
+App.get('/likes', function(request, response) {
+  SL.getLikes(request.query.location_id, function(err, data) {
+    returnJSON(response, err, data);
+  });
+});
+
 App.get('/comments', function(request, response) {
   SL.getComments(request.query.location_id, function(err, data) {
     returnJSON(response, err, data);

@@ -15,6 +15,14 @@ var Comments = SL.Collection.extend({
   }
 });
 
+var Likes = SL.Collection.extend({
+  url: '/likes',
+
+  parse: function(response) {
+    return response.rows;
+  }
+});
+
 var Offering = SL.Model.extend();
 
 var Offerings = SL.Collection.extend({

@@ -318,6 +318,9 @@ a {
   color: #FFFFFF; }
 
 .HeaderItem-link {
+  text-decoration: none;
+  display: block;
+  padding: 3px 5px;
   border: none;
   outline: none;
   background: none;
@@ -727,6 +730,18 @@ a {
 
 .Page-content p {
   margin: 0 0 10px 0; }
+
+.StaticPage {
+  margin: 60px 0 0 0;
+  text-align: left;
+  box-sizing: border-box;
+  padding: 20px;
+  font-family: 'Open sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.5; }
+
+.StaticPage p {
+  margin: 0 0 5px 0; }
 
 /*# sourceMappingURL=page.css.map */
 

@@ -30,7 +30,11 @@
   display: inline-block;
   color: #FFFFFF;
 }
+
 .HeaderItem-link {
+  text-decoration: none;
+  display: block;
+  padding: 3px 5px;
   border: none;
   outline: none;
   background: none;
@@ -52,13 +56,13 @@
 }
 
 @keyframes navBar-hover {
- 0% {color: #FFFFFF;}
- 100% {color: #00D5A5;}  
+  0% {color: #FFFFFF;}
+  100% {color: #00D5A5;}  
 }
 
 @-webkit-keyframes navBar-hover {
- 0% {color: #FFFFFF;}
- 100% {color: #00D5A5;}  
+  0% {color: #FFFFFF;}
+  100% {color: #00D5A5;}
 }
 
 @keyframes btnInfo-hover{

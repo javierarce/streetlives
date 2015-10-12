@@ -4,9 +4,7 @@ var Router = Backbone.Router.extend({
 
   routes: {
     "": "map",
-    "/": "map",
-    "about": "about",
-    "privacy": "privacy"
+    "/": "map"
   },
 
   map: function() {

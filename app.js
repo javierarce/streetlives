@@ -20,11 +20,11 @@ App.get('/', function(request, response) {
 });
 
 App.get('/about', function(request, response) {
-  response.render('index', { map_id: Config.MAP_ID, username: Config.DB.USER });
+  response.render('about', { map_id: Config.MAP_ID, username: Config.DB.USER });
 });
 
 App.get('/privacy', function(request, response) {
-  response.render('index', { map_id: Config.MAP_ID, username: Config.DB.USER });
+  response.render('privacy', { map_id: Config.MAP_ID, username: Config.DB.USER });
 });
 
 App.post('/location', function(request, response) {

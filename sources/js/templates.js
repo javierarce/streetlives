@@ -77,7 +77,7 @@ __p += '<a href="' +
 __e( url ) +
 '" class="HeaderTitle">\n  ' +
 __e( title ) +
-'\n</a>\n\n<ul class="HeaderItems">\n  <li class="HeaderItem"><button class="HeaderItem-link is-selected js-item js-map">Map</button></li>\n  <li class="HeaderItem"><button class="HeaderItem-link js-item js-about">About</button></li>\n  <li class="HeaderItem"><button class="HeaderItem-link js-item js-privacy">Privacy</button></li>\n</ul>\n';
+'\n</a>\n\n<ul class="HeaderItems">\n  <li class="HeaderItem"><a href=\'/\' class="HeaderItem-link is-selected js-item js-map">Map</a></li>\n  <li class="HeaderItem"><a href=\'/about\' class="HeaderItem-link js-item js-about">About</a></li>\n  <li class="HeaderItem"><a href=\'/privacy\' class="HeaderItem-link js-item js-privacy">Privacy</a></li>\n</ul>\n';
 
 }
 return __p

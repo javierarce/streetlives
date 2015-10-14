@@ -648,7 +648,11 @@ a {
   margin: auto;
   font-family: 'Open sans', sans-serif;
   font-size: 15px;
-  font-weight: 300; }
+  font-weight: 300;
+  line-height: normal; }
+
+.LocationInformation-content a {
+  color: #00D5A5; }
 
 .LocationInformation-title {
   border-bottom: 1px solid #ccc;

@@ -167,7 +167,7 @@ __e( offerings ) +
  } ;
 __p += '\n    ';
  if (description) { ;
-__p += '\n    <li class="LocationInformation-field">\n      <label class="LocationInformation-label">Description and tips</label>\n      <p>' +
+__p += '\n    <li class="LocationInformation-field">\n      <label class="LocationInformation-label">Description and tips</label>\n      <p class=\'js-description\'>' +
 __e( description ) +
 '</p>\n    </li>\n    ';
  } ;

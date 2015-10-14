@@ -24,6 +24,7 @@ var LocationInformation = SL.Dialog.extend({
     var options = _.extend({ title: this._TEXT.title, description: '' }, this.location.attributes);
 
     this.$('.js-content').append(this.templateContent(options));
+    this.$('.js-description').html(options.description);
 
     this.comments = new CommentsView({ name: options.name, location_id: options.cartodb_id });
     this.comments.render();

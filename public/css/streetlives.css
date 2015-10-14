@@ -143,10 +143,11 @@ a {
   font-size: 14px; }
 
 .CommentList-itemDate {
-  text-align: right;
+  text-align: left;
   display: block;
+  padding: 12px 0 0 0;
   margin: 0 0 3px 0;
-  font-size: 12px;
+  font-size: 10px;
   color: #666; }
 
 .Comments-inner {
@@ -172,8 +173,9 @@ a {
   outline: none; }
 
 .CommentList-username {
+  padding: 2px 0 8px 0;
   font-size: 11px;
-  text-align: right;
+  text-align: left;
   color: #666; }
 
 /*# sourceMappingURL=comment.css.map */
@@ -478,10 +480,15 @@ a {
 /*# sourceMappingURL=jquery.css.map */
 
 .LikeButtons {
-  margin: 0 0 10px 0; }
+  margin: 0 0 20px 0; }
 
 .LikeButtons-title {
   margin: 0 0 3px 0;
+  font-size: 12px; }
+
+.LikeButtons-response {
+  margin: -2px 0 0 0;
+  padding: 0 0 0 14px;
   font-size: 12px; }
 
 .LikeButtons-list {
@@ -489,7 +496,8 @@ a {
 
 .LikeButtons-listItem {
   display: inline-block;
-  margin: 0 5px 0 0; }
+  margin: 0 5px 0 0;
+  padding: 8px 25px 8px 0px; }
 
 .LikeButton {
   display: block;
@@ -511,6 +519,9 @@ a {
   opacity: 1; }
 
 /*# sourceMappingURL=like_button.css.map */
+
+.LikesList {
+  padding: 4px 0 10px 0; }
 
 .LikesList-item {
   display: inline-block;
@@ -774,10 +785,12 @@ a {
   margin: 60px 0 0 0;
   text-align: left;
   box-sizing: border-box;
-  padding: 20px;
   font-family: 'Open sans', sans-serif;
   font-size: 16px;
-  line-height: 1.5; }
+  line-height: 1.5;
+  overflow: auto;
+  height: 100%;
+  padding-bottom: 10%; }
 
 .StaticPage-title {
   margin: 0 0 10px 0;
@@ -787,7 +800,66 @@ a {
   line-height: normal; }
 
 .StaticPage p {
-  margin: 0 0 5px 0; }
+  margin: 0 0 5px 0;
+  max-width: 60%;
+  padding-left: 20%;
+  padding-bottom: 1%; }
+
+.StaticPage h2 {
+  margin: 3% 0 5px 0;
+  max-width: 60%;
+  padding-left: 20%;
+  padding-bottom: 1%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 32px;
+  font-weight: bold; }
+
+.StaticPage h3 {
+  margin: 0 0 5px 0;
+  max-width: 60%;
+  padding-left: 20%;
+  padding-bottom: 1%;
+  font-weight: lighter;
+  font-size: 32px; }
+
+.StaticPage h4 {
+  margin: 2% 0 -5px 0;
+  max-width: 60%;
+  padding-left: 20%;
+  padding-bottom: 1%;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px; }
+
+.StaticPage h5 {
+  margin: 0 0 5px 0;
+  max-width: 40%;
+  padding-left: 20%;
+  padding-bottom: 1%;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-size: 14px;
+  color: #444444; }
+
+.StaticPage a {
+  max-width: 60%;
+  padding-bottom: 1%;
+  font-weight: lighter;
+  font-size: 12px;
+  color: #444444;
+  line-height: 0px; }
+
+.Outreach {
+  background: transparent url(/img/charities.png) no-repeat;
+  margin-left: 18%;
+  width: 770px;
+  height: 94px;
+  background-size: cover;
+  background-color: #F8F8F8;
+  background-blend-mode: multiply; }
 
 /*# sourceMappingURL=page.css.map */
 

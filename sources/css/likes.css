@@ -1,3 +1,6 @@
+.LikesList {
+  padding: 4px 0 10px 0; }
+
 .LikesList-item {
   display: inline-block;
   font-size: 13px; }

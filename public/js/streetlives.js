@@ -284,7 +284,7 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<div class="Comments-inner">\n  <div class="Comments-content js-comments">\n    <label class="LocationInformation-label">Comments</label>\n    <div class="js-likes"></div>\n    <ul class="CommentList js-comment-list scroll-pane"></ul>\n  </div>\n  <div class="Comments-form">\n    <label class="LocationInformation-label">Add something to the conversation!</label>\n    <div class="InputField InputField-area js-field">\n      <textarea placeholder="Feel free to add tips, warnings, comments or review about \'' +
 __e( name ) +
-'\'" class="Input InputArea js-comment"></textarea>\n    </div>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your name or initials (optional)</label>\n      <div class="InputField js-field">\n        <input type="text" class="Input js-username" value="" />\n      </div>\n    </li>\n\n    <div class="LikeButtons">\n      <p class="LikeButtons-title">Recommend?</p>\n      <ul class="LikeButtons-list">\n        <li class="LikeButtons-listItem"><button class="LikeButton js-like" data-value="1"></button></li>\n        <li class="LikeButtons-listItem"><button class="LikeButton LikeButton--dislike js-like" data-value="0"></button></li>\n      </ul>\n    </div>\n    \n    <button class="Button is-disabled js-ok">Add comment</button>\n  </div>\n</div>\n';
+'\'" class="Input InputArea js-comment"></textarea>\n    </div>\n\n    <li class="LocationForm-field">\n      <label class="LocationForm-label">Your name or initials (optional)</label>\n      <div class="InputField js-field">\n        <input type="text" class="Input js-username" value="" />\n      </div>\n    </li>\n\n    <div class="LikeButtons">\n      <p class="LikeButtons-title">Would you recommend this location to others?</p>\n      <ul class="LikeButtons-list">\n        <li class="LikeButtons-listItem"><button class="LikeButton js-like" data-value="1"><p class="LikeButtons-response">Yes</p></button></li>\n        <li class="LikeButtons-listItem"><button class="LikeButton LikeButton--dislike js-like" data-value="0"><p class="LikeButtons-response">No</p></button></li>\n      </ul>\n    </div>\n    \n    <button class="Button is-disabled js-ok">Add comment</button>\n  </div>\n</div>\n';
 
 }
 return __p
@@ -426,7 +426,7 @@ this["JST"]["sources/templates/page.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="Page-content js-content"></div>\n';
+__p += '';
 
 }
 return __p

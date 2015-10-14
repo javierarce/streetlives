@@ -21,10 +21,11 @@
   font-size: 14px; }
 
 .CommentList-itemDate {
-  text-align: right;
+  text-align: left;
   display: block;
+  padding: 12px 0 0 0;
   margin: 0 0 3px 0;
-  font-size: 12px;
+  font-size: 10px;
   color: #666; }
 
 .Comments-inner {
@@ -50,8 +51,9 @@
   outline: none; }
 
 .CommentList-username {
+  padding: 2px 0 8px 0;
   font-size: 11px;
-  text-align: right;
+  text-align: left;
   color: #666; }
 
 /*# sourceMappingURL=comment.css.map */

@@ -181,7 +181,7 @@ this["JST"]["sources/templates/page.jst.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '';
+__p += '<div class="Page-content js-content"></div>\n';
 
 }
 return __p

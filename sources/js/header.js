@@ -25,7 +25,7 @@ var Header = SL.View.extend({
 
   render: function() {
     var options = {
-      title: 'Streetlives NYC',
+      title: 'StreetlivesNYC',
       url: 'http://beta.streetlives.nyc'
     };
 

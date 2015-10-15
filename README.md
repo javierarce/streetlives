@@ -1,6 +1,6 @@
 ![](https://travis-ci.org/javierarce/streetlives.svg?branch=master)
 
-### How to run Streetlives locally:
+#### How to run Streetlives locally:
 
 1. Clone the repo:
 
@@ -25,3 +25,10 @@
 `node app.js`
 
 8. Open `http://localhost:7000` in your browser.
+
+#### How to work on the app:
+
+1. Install and run the project.
+2. Run: `grunt watch`.
+3. Edit the files in the folders: `sources/scss`, `sources/js` & `sources/templates`.
+4. Saving a file in those folders will automatically compile them and refresh the site.
